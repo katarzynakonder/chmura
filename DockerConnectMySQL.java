@@ -11,71 +11,75 @@ public class DockerConnectMySQL {
         Connection conn = null;
         Statement stmt = null;
         try {
+
+         Class.forName("com.mysql.jdbc.Driver");
+         System.out.println("Łączenie z bazą")
             Boolean connect = false;
-            do {
-                try {
-                    conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                    connect = true;
-                } catch (Exception e) {
-                    System.out.println("Łączenie z serwerem bazy danych");
-                    
-                }
-            } while (!connect);
-			System.out.println("Połączono z serwerem bazy danych");
+
+                 while(!connect)
+      {
+         try {
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            connect = true;
+         }
+         catch(Exception e) {
+            System.out.println("Łączenie z bazą");
+            Thread.sleep(5000);
+         }
+      }
+			System.out.println("Połączono z bazą");
             stmt = conn.createStatement();
             String sql;
-            sql = "DROP TABLE IF EXISTS Persons";
+            sql = "DROP TABLE IF EXISTS Ludzie";
             stmt.executeUpdate(sql);
-            sql = "CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), City varchar(255) );";
+            sql = "CREATE TABLE Ludzie (ID int, Imię varchar(255), Nazwisko varchar(255), Wiek int );";
             stmt.executeUpdate(sql);
-            sql = "INSERT INTO Persons(PersonID, LastName, FirstName, City) VALUES (1,'Komoda', 'Alfred', 'Lublin'),(2, 'Worsall', 'Raimund', 'Penambangan'),(3, 'Allcorn', 'Janie', 'Florencia');";
+            sql = "INSERT INTO Ludzie(ID, Imię, Nazwisko, Wiek) VALUES (1,'Robert', ' Lewandowski', '35'),(2, 'Kamil', 'Grosicki, '16'),(3, 'Łukasz', 'Fabiański', '25');";
             stmt.executeUpdate(sql);
             Scanner menu = new Scanner(System.in);
             String i;
             do {
                 System.out.println("");
-                System.out.println("menu od sql");
-                System.out.println("wpisz tylko liczbę");
-                System.out.println("wybierz opcje:");
-                System.out.println("(1) dodanie encji");
-                System.out.println("(2) wyświetlenie");
-                System.out.println("(3) wyjdz");
+                System.out.println("Wybierz nr:");
+                System.out.println("[1] Dodaj encję");
+                System.out.println("[2] Pokaż zawartość bazy");
+                System.out.println("[3] Wyjdź");
                 i = (String) menu.next();
                 switch (i) {
                     case "1": {
                         Scanner insert = new Scanner(System.in);
-                        sql = "SELECT PersonID FROM Persons ORDER BY PersonID DESC LIMIT 1;";
+                        sql = "SELECT ID FROM Ludzie ORDER BY ID DESC LIMIT 1;";
                         ResultSet rs = stmt.executeQuery(sql);
                         int e = 0;
                         if (rs.next()) {
-                            e = rs.getInt("PersonID");
+                            e = rs.getInt("ID");
                         }
                         rs.close();
                         e++;
-                        sql = "INSERT INTO Persons (PersonID, LastName, FirstName, City) VALUES (" + e + ",'";
-                        System.out.println("Podaj Nazwisko:");
+                        sql = "INSERT INTO Ludzie (ID, Imię, Nazwisko, Wiek) VALUES (" + e + ",'";
+                        System.out.println("Podaj imię:");
                         sql += insert.nextLine();
                         sql += "', '";
-                        System.out.println("Podaj Imię:");
+                        System.out.println("Podaj nazwisko:");
                         sql += insert.nextLine();
                         sql += "', '";
-                        System.out.println("Podaj Miasto:");
+                        System.out.println("Podaj wiek:");
                         sql += insert.nextLine();
                         sql += "');";
                         stmt.executeUpdate(sql);
-						System.out.println("Dodano encje");
+						System.out.println("Dodano encję");
                         break;
                     }
                     case "2": {
-                        sql = "SELECT PersonID, FirstName, LastName, City FROM Persons";
+                        sql = "SELECT ID, Imię, Nazwisko, Wiek FROM Ludzie";
                         ResultSet rs = stmt.executeQuery(sql);
-                        System.out.printf("|%5s|%15s|%15s|%15s|\n", "ID: ", "Imię: ", "Nazwisko: ", "Miasto: ");
+                        System.out.printf("|%5s|%15s|%15s|%15s|\n", "ID: ", "Imię: ", "Nazwisko: ", "Wiek: ");
                         while (rs.next()) {
-                            int id = rs.getInt("PersonID");
-                            String first = rs.getString("FirstName");
-                            String last = rs.getString("LastName");
-                            String city = rs.getString("City");
-                            System.out.printf("|%4d |%14s |%14s |%14s |\n", id, first, last, city);
+                            int id = rs.getInt("ID");
+                            String first = rs.getString("Imię");
+                            String last = rs.getString("Nazwisko");
+                            String city = rs.getString("Wiek");
+                            System.out.printf("|%4d |%14s |%14s |%14s |\n", id, imię, nazwisko, wiek);
                         }
                         rs.close();
                         break;
