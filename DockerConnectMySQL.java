@@ -90,7 +90,7 @@ public class DockerConnectMySQL {
                     }
                     default: {
 						System.out.println("");
-                        System.out.println("Zły wybór opcji!");
+                        System.out.println("Nieprawidłowy wybór opcji!");
                         break;
                     }
                 }
