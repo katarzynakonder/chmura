@@ -76,10 +76,10 @@ public class DockerConnectMySQL {
                         System.out.printf("|%5s|%15s|%15s|%15s|\n", "id: ", "Imię: ", "Nazwisko: ", "Wiek: ");
                         while (rs.next()) {
                             int id = rs.getInt("id");
-                            String first = rs.getString("Imię");
-                            String last = rs.getString("Nazwisko");
-                            String city = rs.getString("Wiek");
-                            System.out.printf("|%4d |%14s |%14s |%14s |\n", id, imię, nazwisko, wiek);
+                            String imie = rs.getString("Imię");
+                            String nazwisko = rs.getString("Nazwisko");
+                            String wiek = rs.getString("Wiek");
+                            System.out.printf("|%4d |%14s |%14s |%14s |\n", id, imie, nazwisko, wiek);
                         }
                         rs.close();
                         break;
