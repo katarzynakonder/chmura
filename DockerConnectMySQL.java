@@ -13,16 +13,10 @@ public class DockerConnectMySQL {
         try {
 
          Class.forName("com.mysql.jdbc.Driver");
-         System.out.println("Łączenie z bazą");
+         System.out.println("Łączenie z serwerem bazy danych");
             Boolean connect = false;
 
-                 while(!connect)
-      {
-         	 
-   try{
-         Class.forName("com.mysql.jdbc.Driver");
-         System.out.println("Łączenie z serwerem bazy danych");
-	 Boolean connect = false;
+     
       while(!connect)
       {
          try {
