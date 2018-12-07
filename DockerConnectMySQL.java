@@ -18,18 +18,26 @@ public class DockerConnectMySQL {
 
                  while(!connect)
       {
+         	 
+   try{
+         Class.forName("com.mysql.jdbc.Driver");
+         System.out.println("Łączenie z serwerem bazy danych");
+	 Boolean connect = false;
+      while(!connect)
+      {
          try {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
             connect = true;
          }
-         catch(Exception e) {
-            System.out.println("Łączenie z bazą");
+         catch(Exception e) {	 
+            System.out.println("Łączenie z serwerem bazy danych");
             Thread.sleep(5000);
          }
       }
-			System.out.println("Połączono z bazą");
+            System.out.println("Połączono z serwerem bazy danych");
             stmt = conn.createStatement();
             String sql;
+            Boolean stop = false;
             sql = "DROP TABLE IF EXISTS Ludzie";
             stmt.executeUpdate(sql);
             sql = "CREATE TABLE Ludzie (id int, Imię varchar(255), Nazwisko varchar(255), Wiek int );";
