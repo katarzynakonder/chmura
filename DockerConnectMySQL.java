@@ -18,7 +18,7 @@ public class DockerConnectMySQL {
                     connect = true;
                 } catch (Exception e) {
                     System.out.println("Łączenie z serwerem bazy danych");
-                    Thread.sleep(1000);
+                    
                 }
             } while (!connect);
 			System.out.println("Połączono z serwerem bazy danych");
