@@ -36,7 +36,7 @@ public class DockerConnectMySQL {
 	  sqlNewDb="CREATE TABLE zadanko ( imie varchar(255), nazwisko varchar(255), wiek int)"; 
       System.out.println("Tworzenie bazy");
       stmt.executeUpdate(sqlNewDb);
-      System.out.println("Filling table...");
+      
       stmt.executeUpdate("INSERT INTO zadanko ( imie, nazwisko, wiek)"+ 
 			 "VALUES('Michał', 'Wiśniewski', '25')"+
 			       ",('Kamil', 'Grosicki','53')"+
@@ -64,6 +64,7 @@ public class DockerConnectMySQL {
 				case 2:
 				
 					String imie, nazwisko;
+				        int wiek;
 					System.out.println("Podaj imię:");
 					imie=input.next();
 					System.out.println("Podaj nazwisko:");
