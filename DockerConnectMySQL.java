@@ -72,7 +72,7 @@ public class DockerConnectMySQL {
 		
 					System.out.println("Dodaj dane do tabeli");
 					stmt.executeUpdate("INSERT INTO zadanko ( imie, nazwisko, wiek)"+ 
-									   "VALUES('" + imie + "','" + nazwisko + "',"+ wiek +")");
+									   "VALUES('" + imie + "','" + nazwisko + "','"+ wiek +"')");
 				break;
 				case 3:
 				
