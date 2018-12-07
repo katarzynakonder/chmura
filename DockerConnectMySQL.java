@@ -73,7 +73,7 @@ public class DockerConnectMySQL {
                             String first = rs.getString("Imię");
                             String last = rs.getString("Nazwisko");
                             String city = rs.getString("Wiek");
-                            System.out.printf("|%4d |%14s |%14s |%14s |\n", id, imię, nazwisko, wiek);
+                            System.out.printf("|%4d |%14s |%14s |%14s |\n", ID, Imię, Nazwisko, Wiek);
                         }
                         rs.close();
                         break;
