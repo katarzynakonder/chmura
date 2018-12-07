@@ -38,9 +38,9 @@ public class DockerConnectMySQL {
       stmt.executeUpdate(sqlNewDb);
       System.out.println("Filling table...");
       stmt.executeUpdate("INSERT INTO zadanko ( imie, nazwisko, wiek)"+ 
-			 "VALUES('Michał', 'Wiśniewski', " 25")"+
-			       ",('Kamil', 'Grosicki',"53")"+
-			       ",('Andrzej','Grabowski', "36")");  			   
+			 "VALUES('Michał', 'Wiśniewski', '25')"+
+			       ",('Kamil', 'Grosicki','53')"+
+			       ",('Andrzej','Grabowski', '36')");  			   
 	Scanner input = new Scanner(System.in);
 	   while(!stop)
 	   {	
