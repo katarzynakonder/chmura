@@ -12,15 +12,10 @@ public class DockerConnectMySQL {
    
    public static void main(String[] args) {
    Connection conn = null;
-   Statement stmt = null;
-		 
-   try{
-	   
+   Statement stmt = null;	 
+   try{   
          Class.forName("com.mysql.jdbc.Driver");
-         System.out.println("Łączenie z bazą");
-
 	 Boolean connect = false;
-    
       while(!connect)
       {
          try {
@@ -36,33 +31,23 @@ public class DockerConnectMySQL {
       stmt = conn.createStatement();
       String sqlSelect, sqlNewDb, sqlDrop;
 	  Boolean stop = false;
-	
 	  sqlDrop ="DROP TABLE IF EXISTS zadanko";
       stmt.executeUpdate(sqlDrop); 
-	 
 	  sqlNewDb="CREATE TABLE zadanko ( imie varchar(255), nazwisko varchar(255), wiek int)"; 
       System.out.println("Tworzenie bazy");
-      stmt.executeUpdate(sqlNewDb); 
-	   
-      Random generator = new Random();
-	      
+      stmt.executeUpdate(sqlNewDb);
       System.out.println("Filling table...");
-      stmt.executeUpdate("INSERT INTO test ( imie, nazwisko, wiek)"+ 
+      stmt.executeUpdate("INSERT INTO zadanko ( imie, nazwisko, wiek)"+ 
 			 "VALUES('Michał', 'Wiśniewski', " + 25")"+
 			       ",('Kamil', 'Grosicki'," + 53 + ")"+
-			       ",('Andrzej','Grabowski', "+ 36 +")");  
-				   
+			       ",('Andrzej','Grabowski', "+ 36 +")");  			   
 	Scanner input = new Scanner(System.in);
-	
 	   while(!stop)
-	   {
-			
+	   {	
       		System.out.println("[1] Pokaż tabelę");
       		System.out.println("[2] Dodaj encję");
-      		System.out.println("[3] Koniec");
-		   
-		   int val = input.nextInt();
-		   
+      		System.out.println("[3] Koniec"); 
+		   int val = input.nextInt();  
 		   switch(val) {
 			    case 1:
 				
