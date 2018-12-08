@@ -28,7 +28,7 @@ public class DockerConnectMySQL {
 		//usuwa tabelę, jeśli taka istnieje
             sql = "DROP TABLE IF EXISTS Ludzie";
             stmt.executeUpdate(sql);
-		//tworzy tabeli
+		//tworzy tabelę
             sql = "CREATE TABLE Ludzie (Id int, Imię varchar(255), Nazwisko varchar(255), Wiek int );";
             stmt.executeUpdate(sql);
 		//dodaje do tabeli dane
