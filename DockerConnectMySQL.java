@@ -17,7 +17,7 @@ public class DockerConnectMySQL {
                     conn = DriverManager.getConnection(DB_URL, USER, PASS);
                     connect = true;
                 } catch (Exception e) {
-                    System.out.println("Łączenie...");
+                    System.out.println("Łączenie z serwerem bazy danych");
                     Thread.sleep(1000);
                 }
 		    //łączenie z bazą
@@ -66,7 +66,7 @@ public class DockerConnectMySQL {
                         sql += insert.nextLine();
                         sql += "');";
                         stmt.executeUpdate(sql);
-						System.out.println("Dodano do bazy[!]");
+						System.out.println("Dodano do tabeli[!]");
                         break;
                     }
                     case "2": {
