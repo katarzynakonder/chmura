@@ -17,7 +17,7 @@ public class DockerConnectMySQL {
                     conn = DriverManager.getConnection(DB_URL, USER, PASS);
                     connect = true;
                 } catch (Exception e) {
-                    System.out.println("Łączenie z serwerem bazy danych");
+                    System.out.println("Łączenie...");
                     Thread.sleep(1000);
                 }
 		    //łączenie z bazą
