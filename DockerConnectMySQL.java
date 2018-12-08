@@ -17,63 +17,65 @@ public class DockerConnectMySQL {
                     conn = DriverManager.getConnection(DB_URL, USER, PASS);
                     connect = true;
                 } catch (Exception e) {
-                    System.out.println("Łączenie z serwerem");
+                    System.out.println("Łączenie z serwerem bazy danych");
                     Thread.sleep(1000);
                 }
             } while (!connect);
-			System.out.println("Połączono z serwerem");
+			System.out.println("Połączono z serwerem bazy danych");
             stmt = conn.createStatement();
             String sql;
-            sql = "DROP TABLE IF EXISTS Ludzie";
+            sql = "DROP TABLE IF EXISTS Persons";
             stmt.executeUpdate(sql);
-            sql = "CREATE TABLE Ludzie (id int, Imię varchar(255), Nazwisko varchar(255), Wiek int );";
+            sql = "CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), City varchar(255) );";
             stmt.executeUpdate(sql);
-            sql = "INSERT INTO Ludzie(id, Imię, Nazwisko, Wiek) VALUES (1,'Michał', 'Wiśniewski', '52'),(2, 'Krzysztof', 'Krawczyk', '25'),(3, 'Andrzej', 'Duda', '15');";
+            sql = "INSERT INTO Persons(PersonID, LastName, FirstName, City) VALUES (1,'Komoda', 'Alfred', 'Lublin'),(2, 'Worsall', 'Raimund', 'Penambangan'),(3, 'Allcorn', 'Janie', 'Florencia');";
             stmt.executeUpdate(sql);
             Scanner menu = new Scanner(System.in);
             String i;
             do {
                 System.out.println("");
-                System.out.println("Wybierz opcję:");
-                System.out.println("[1] Dodaj do bazy");
-                System.out.println("[2] Pokaż zawartość bazy");
-                System.out.println("[3] Wyjdź");
+                System.out.println("menu od sql");
+                System.out.println("wpisz tylko liczbę");
+                System.out.println("wybierz opcje:");
+                System.out.println("(1) dodanie encji");
+                System.out.println("(2) wyświetlenie");
+                System.out.println("(3) wyjdz");
                 i = (String) menu.next();
                 switch (i) {
                     case "1": {
                         Scanner insert = new Scanner(System.in);
-                        sql = "SELECT id FROM Ludzie ORDER BY id DESC LIMIT 1;";
+                        sql = "SELECT PersonID FROM Persons ORDER BY PersonID DESC LIMIT 1;";
                         ResultSet rs = stmt.executeQuery(sql);
                         int e = 0;
                         if (rs.next()) {
-                            e = rs.getInt("id");
+                            e = rs.getInt("PersonID");
                         }
                         rs.close();
                         e++;
-                        sql = "INSERT INTO Ludzie (id, Imię, Nazwisko, Wiek) VALUES (" + e + ",'";
-                        System.out.println("Podaj imię:");
+                        sql = "INSERT INTO Persons (PersonID, LastName, FirstName, City) VALUES (" + e + ",'";
+                        System.out.println("Podaj Nazwisko:");
                         sql += insert.nextLine();
                         sql += "', '";
-                        System.out.println("Podaj nazwisko:");
+                        System.out.println("Podaj Imię:");
                         sql += insert.nextLine();
                         sql += "', '";
-                        System.out.println("Podaj wiek:");
+                        System.out.println("Podaj Miasto:");
                         sql += insert.nextLine();
                         sql += "');";
                         stmt.executeUpdate(sql);
-						System.out.println("Dodano do bazy");
+						System.out.println("Dodano encje");
                         break;
                     }
                     case "2": {
-                        sql = "SELECT id, Imię, Nazwisko, Miasto FROM Ludzie";
+                        sql = "SELECT PersonID, FirstName, LastName, City FROM Persons";
                         ResultSet rs = stmt.executeQuery(sql);
-                        System.out.printf("|%5s|%15s|%15s|%15s|\n", "id: ", "Imię: ", "Nazwisko: ", "Wiek: ");
+                        System.out.printf("|%5s|%15s|%15s|%15s|\n", "ID: ", "Imię: ", "Nazwisko: ", "Miasto: ");
                         while (rs.next()) {
-                            int id = rs.getInt("id");
-                            String imie = rs.getString("Imię");
-                            String nazwisko = rs.getString("Nazwisko");
-                            String wiek = rs.getString("Wiek");
-                            System.out.printf("|%4d |%14s |%14s |%14s |\n", id, imie, nazwisko, wiek);
+                            int id = rs.getInt("PersonID");
+                            String first = rs.getString("FirstName");
+                            String last = rs.getString("LastName");
+                            String city = rs.getString("City");
+                            System.out.printf("|%4d |%14s |%14s |%14s |\n", id, first, last, city);
                         }
                         rs.close();
                         break;
@@ -84,7 +86,7 @@ public class DockerConnectMySQL {
                     }
                     default: {
 						System.out.println("");
-                        System.out.println("Zły wybór!");
+                        System.out.println("Wybierz odpowiednią opcje!");
                         break;
                     }
                 }
